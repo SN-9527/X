@@ -13,7 +13,8 @@
         "tag": "dns_default",
         "address": "tls://8.8.8.8"
       }
-    ]
+    ],
+    "strategy": "ipv4_only"
   },
   "inbounds": [
     {
