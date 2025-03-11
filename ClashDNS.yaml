@@ -20,3 +20,18 @@ dns:
   fallback-filter:
     geoip: true
     geoip-code: CN
+
+
+  - name: "edge"
+    type: vless
+    server: servernameservernameservername
+    port: 2053
+    uuid: uuiduuiduuid
+    tls: true
+    servername: servernameservernameservername
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /?ed=2560
+      headers:
+        Host: servernameservernameservername
