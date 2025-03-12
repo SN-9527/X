@@ -1,0 +1,27 @@
+rules:
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - proxy
+proxies:
+  - name: "proxy"
+    type: vless
+    server: server
+    port: 8848
+    udp: true
+    uuid: 00bf5b23-1561-48a4-a263-c9ec682bd799
+    flow: xtls-rprx-vision
+    packet-encoding: xudp
+    tls: true
+    servername: www.tesla.com
+    alpn:
+      - h3
+    client-fingerprint: chrome
+    skip-cert-verify: false
+    reality-opts:
+      public-key: i1HyU0EFyFynqhkF9-Ka56pOZUXRgRwjg5bmsKJxGCg
+      short-id: a2d8c2d4
