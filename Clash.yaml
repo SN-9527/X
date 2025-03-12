@@ -25,3 +25,12 @@ proxies:
     reality-opts:
       public-key: i1HyU0EFyFynqhkF9-Ka56pOZUXRgRwjg5bmsKJxGCg
       short-id: a2d8c2d4
+  - name: "proxy"
+    type: hysteria2
+    server: server
+    port: 2048
+    password: xW24qJeqXNCDAR0GvWBiNrc3uBGfV3GB
+    up: "1000 Mbps"
+    down: "1000 Mbps"
+    sni: server
+    skip-cert-verify: false
