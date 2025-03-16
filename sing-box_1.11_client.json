@@ -1,0 +1,101 @@
+{
+    "log": {
+        "disabled": false,
+        "level": "warn"
+    },
+    "dns": {
+        "servers": [
+            {
+                "address": "udp://nireus.cc:1053",
+                "address_resolver": "dns_main",
+                "detour": "direct_out"
+            },
+            {
+                "tag": "dns_main",
+                "address": "udp://223.5.5.5:53",
+                "detour": "direct_out"
+            }
+        ],
+        "rules": [
+            {
+                "outbound": "any",
+                "server": "dns_main"
+            },
+            {
+                "rule_set": "china_site",
+                "server": "dns_main"
+            }
+        ],
+        "strategy": "prefer_ipv6",
+        "independent_cache": true,
+        "cache_capacity": 0,
+        "reverse_mapping": false
+    },
+    "inbounds": [
+        {
+            "tag": "tun_main",
+            "type": "tun",
+            "address": [
+                "172.18.0.1/24",
+                "fdfe:dcba:9876::1/96"
+            ],
+            "mtu": 9000,
+            "auto_route": true,
+            "strict_route": true,
+            "stack": "system"
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "direct_out",
+            "type": "direct"
+        },
+        {
+            "tag": "proxy_out"
+        }
+    ],
+    "route": {
+        "rules": [
+            {
+                "inbound": "tun_main",
+                "action": "sniff"
+            },
+            {
+                "protocol": "dns",
+                "action": "hijack-dns"
+            },
+            {
+                "ip_is_private": true,
+                "outbound": "direct_out"
+            },
+            {
+                "rule_set": "china_site",
+                "outbound": "direct_out"
+            },
+            {
+                "rule_set": "china_ipcidr",
+                "outbound": "direct_out"
+            }
+        ],
+        "rule_set": [
+            {
+                "tag": "china_ipcidr",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+                "download_detour": "proxy_out",
+                "update_interval": "1d"
+            },
+            {
+                "tag": "china_site",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+                "download_detour": "proxy_out",
+                "update_interval": "1d"
+            }
+        ],
+        "final": "proxy_out",
+        "auto_detect_interface": true
+    }
+}
