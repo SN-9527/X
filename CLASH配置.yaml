@@ -34,3 +34,25 @@ proxies:
     down: "1000 Mbps"
     sni: server
     skip-cert-verify: false
+dns:
+  enable: true
+  cache-algorithm: arc
+  prefer-h3: false
+  use-hosts: true
+  use-system-hosts: true
+  respect-rules: false
+  listen: 0.0.0.0:1053
+  ipv6: true
+  default-nameserver:
+    - system
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - "geosite:private"
+  nameserver-policy:
+    "geosite:cn,private": system
+  nameserver:
+    - tls://dns.google
+  fallback:
+    - tls://dns.google
