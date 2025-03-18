@@ -1,4 +1,7 @@
 rules:
+  - GEOSITE,category-ads-all,REJECT
+  - DOMAIN-SUFFIX,.cn,DIRECT
+  - GEOSITE,cn,DIRECT
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
   - MATCH,PROXY
@@ -6,53 +9,66 @@ proxy-groups:
   - name: PROXY
     type: select
     proxies:
-      - proxy
+      - USA
 proxies:
-  - name: "proxy"
+  - name: USA
     type: vless
-    server: server
-    port: 8848
+    server: 104.19.0.0
+    port: 8443
     udp: true
-    uuid: 00bf5b23-1561-48a4-a263-c9ec682bd799
-    flow: xtls-rprx-vision
+    uuid: 
     packet-encoding: xudp
     tls: true
-    servername: www.tesla.com
+    servername: 
     alpn:
       - h3
     client-fingerprint: chrome
-    skip-cert-verify: false
-    reality-opts:
-      public-key: i1HyU0EFyFynqhkF9-Ka56pOZUXRgRwjg5bmsKJxGCg
-      short-id: a2d8c2d4
-  - name: "proxy"
-    type: hysteria2
-    server: server
-    port: 2048
-    password: xW24qJeqXNCDAR0GvWBiNrc3uBGfV3GB
-    up: "1000 Mbps"
-    down: "1000 Mbps"
-    sni: server
-    skip-cert-verify: false
+    skip-cert-verify: true
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: 
 dns:
   enable: true
   cache-algorithm: arc
   prefer-h3: false
   use-hosts: true
   use-system-hosts: true
-  respect-rules: false
+  respect-rules: true
   listen: 0.0.0.0:1053
-  ipv6: true
+  ipv6: false
   default-nameserver:
     - system
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - "geosite:private"
-  nameserver-policy:
-    "geosite:cn,private": system
+    - "geosite:private,cn"
+  proxy-server-nameserver:
+    - https://dns.alidns.com/dns-query
   nameserver:
-    - tls://dns.google
+    - https://dns.alidns.com/dns-query
   fallback:
-    - tls://dns.google
+    - https://dns.google/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 0.0.0.0/8
+      - 10.0.0.0/8
+      - 100.64.0.0/10
+      - 127.0.0.0/8
+      - 169.254.0.0/16
+      - 172.16.0.0/12
+      - 192.0.0.0/24
+      - 192.0.2.0/24
+      - 192.168.0.0/16
+      - 192.88.99.0/24
+      - 198.18.0.0/15
+      - 198.51.100.0/24
+      - 203.0.113.0/24
+      - 224.0.0.0/4
+      - 233.252.0.0/24
+      - 240.0.0.0/4
+      - 255.255.255.255/32
