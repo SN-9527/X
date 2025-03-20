@@ -1,0 +1,9 @@
+mkdir /ssl
+curl https://get.acme.sh | sh -s email=acme@nireus.cc
+alias acme.sh=~/.acme.sh/acme.sh
+acme.sh --upgrade --auto-upgrade
+export CF_Token=""
+export CF_Zone_ID=""
+acme.sh --issue --dns dns_cf -d *.nireus.cc
+systemctl restart sing-box
+acme.sh --install-cert -d *.nireus.cc --key-file /ssl/key.pem  --fullchain-file /ssl/cert.pem --reloadcmd "systemctl restart sing-box"
