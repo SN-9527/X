@@ -1,113 +1,116 @@
 {
-    "log": {
-        "disabled": false,
-        "level": "info"
-    },
-    "dns": {
-        "servers": [
-            {
-                "address": "https://dns.google/dns-query",
-                "address_resolver": "dns_default"
-            },
-            {
-                "tag": "dns_default",
-                "address": "tls://8.8.8.8"
-            }
-        ],
+  "log": {
+    "disabled": false,
+    "level": "info"
+  },
+  "dns": {
+    "servers": [
+      {
+        "address": "tls://8.8.8.8",
         "strategy": "ipv4_only"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "type": "socks",
+      "listen": "::",
+      "listen_port": 443,
+      "users": [
+        {
+          "username": "",
+          "password": ""
+        }
+      ]
     },
-    "inbounds": [
+    {
+      "type": "vless",
+      "listen": "::",
+      "listen_port": 443,
+      "users": [
         {
-            "type": "socks",
-            "listen": "::",
-            "listen_port": 443,
-            "users": [
-                {
-                    "username": "",
-                    "password": ""
-                }
-            ]
-        },
-        {
-            "type": "vless",
-            "listen": "::",
-            "listen_port": 443,
-            "users": [
-                {
-                    "uuid": "00bf5b23-1561-48a4-a263-c9ec682bd799"
-                }
-            ],
-            "tls": {
-                "enabled": true,
-                "server_name": "",
-                "key_path": "key.pem",
-                "certificate_path": "cert.pem"
-            },
-            "transport": {
-                "type": "ws",
-                "path": "/",
-                "headers": {
-                    "Host": ""
-                }
-            }
-        },
-        {
-            "type": "vless",
-            "listen": "::",
-            "listen_port": 443,
-            "users": [
-                {
-                    "uuid": "00bf5b23-1561-48a4-a263-c9ec682bd799",
-                    "flow": "xtls-rprx-vision"
-                }
-            ],
-            "tls": {
-                "enabled": true,
-                "server_name": "www.tesla.com",
-                "reality": {
-                    "enabled": true,
-                    "handshake": {
-                        "server": "www.tesla.com",
-                        "server_port": 443
-                    },
-                    "private_key": "cDSN4JQ8Yaad50ywIBsdAIuHivCN04QI5WSvhY2-MlE",
-                    "short_id": [
-                        "a2d8c2d4"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "hysteria2",
-            "listen": "::",
-            "listen_port": 443,
-            "up_mbps": 1000,
-            "down_mbps": 1000,
-            "users": [
-                {
-                    "name": "",
-                    "password": ""
-                }
-            ],
-            "tls": {
-                "enabled": true,
-                "server_name": "",
-                "key_path": "cert.pem",
-                "certificate_path": "cert.pem"
-            }
+          "uuid": "00bf5b23-1561-48a4-a263-c9ec682bd799"
         }
-    ],
-    "outbounds": [
-        {
-            "type": "direct"
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "",
+        "key_path": "key.pem",
+        "certificate_path": "cert.pem"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": ""
         }
-    ],
-    "route": {
-        "rules": [
-            {
-                "protocol": "dns",
-                "action": "hijack-dns"
-            }
-        ]
+      }
+    },
+    {
+      "type": "vless",
+      "listen": "::",
+      "listen_port": 443,
+      "users": [
+        {
+          "uuid": "00bf5b23-1561-48a4-a263-c9ec682bd799",
+          "flow": "xtls-rprx-vision"
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "www.tesla.com",
+        "reality": {
+          "enabled": true,
+          "handshake": {
+            "server": "www.tesla.com",
+            "server_port": 443
+          },
+          "private_key": "cDSN4JQ8Yaad50ywIBsdAIuHivCN04QI5WSvhY2-MlE",
+          "short_id": [
+            "a2d8c2d4"
+          ]
+        }
+      }
+    },
+    {
+      "type": "hysteria2",
+      "listen": "::",
+      "listen_port": 443,
+      "up_mbps": 1000,
+      "down_mbps": 1000,
+      "obfs": {
+        "type": "salamander",
+        "password": ""
+      },
+      "users": [
+        {
+          "name": "root",
+          "password": ""
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "alpn": [
+          "h3"
+        ],
+        "server_name": "across.nireus.cc",
+        "key_path": "/ssl/key.pem",
+        "certificate_path": "/ssl/cert.pem"
+      },
+      "brutal_debug": false
     }
+  ],
+  "outbounds": [
+    {
+      "type": "direct"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      }
+    ]
+  }
 }
