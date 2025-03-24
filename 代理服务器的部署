@@ -1,0 +1,21 @@
+apt update -y
+
+apt upgrade -y
+
+apt autoremove -y
+
+apt install -y vim
+
+apt install -y wget
+
+apt install -y curl
+
+apt install -y net-tools
+
+apt install -y sudo
+
+bash <(curl -Ls https://github.com/teddysun/across/raw/master/bbr.sh)
+
+bash <(curl -Ls https://sing-box.app/deb-install.sh)
+
+systemctl enable sing-box
