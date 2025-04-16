@@ -1,0 +1,13 @@
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.33-1_all.deb
+apt install -y gnupg
+dpkg -i mysql-apt-config_0.8.33-1_all.deb
+apt update -y
+apt upgrade -y
+apt install mysql-server -y
+systemctl start mysql
+systemctl enable mysql
+mysql -p
+
+update mysql.user set Host = '%' where User = 'root';
+FLUSH PRIVILEGES;
+exit;
