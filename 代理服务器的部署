@@ -1,3 +1,5 @@
+bookworm
+
 apt update -y
 
 apt upgrade -y
@@ -14,8 +16,4 @@ apt install -y net-tools
 
 apt install -y sudo
 
-bash <(curl -Ls https://github.com/teddysun/across/raw/master/bbr.sh)
-
-bash <(curl -Ls https://sing-box.app/deb-install.sh)
-
-systemctl enable sing-box
+bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/x-ui-yg/main/install.sh)
