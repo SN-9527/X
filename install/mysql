@@ -1,6 +1,6 @@
 apt install -y gnupg
 
-wget https://dev.mysql.com/get/mysql-apt-config_0.8.33-1_all.deb
+DOWNLOAD https://dev.mysql.com/get/mysql-apt-config_0.8.33-1_all.deb
 
 dpkg -i mysql-apt-config_0.8.33-1_all.deb
 
@@ -15,5 +15,7 @@ systemctl enable mysql
 mysql -p
 
 update mysql.user set Host = '%' where User = 'root';
+
 FLUSH PRIVILEGES;
+
 exit;

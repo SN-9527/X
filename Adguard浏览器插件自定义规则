@@ -1,19 +1,4 @@
-评论区过滤
-youtube.com##ytd-comments#comments
-bilibili.com##bili-comments
-其他过滤
-youtube.com###related
-bilibili.com##.rcmd-tab
-bilibili.com###danmukuBox
 bilibili.com##.adblock-tips
-bilibili.com###arc_toolbar_report
-bilibili.com##.video-tag-container
-bilibili.com##.bpx-player-sending-area
-bilibili.com##.activity-m-v1
-bilibili.com##.act-end
-bilibili.com###v_desc
-推特过滤
-x.com##li[class="css-175oi2r r-1mmae3n r-3pj75a r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l"]
-x.com##div[class="css-175oi2r r-14tvyh0 r-cpa5s6 r-16y2uox"]
-x.com##div[class="css-175oi2r r-14lw9ot r-jxzhtn r-1867qdf r-1phboty r-rs99b7 r-1ifxtd0 r-1udh08x"]
-x.com##header[class="css-175oi2r r-lrvibr r-1g40b8q r-obd0qt r-16y2uox"]
+bilibili.com##bili-comments
+youtube.com##ytd-comments#comments
+youtube.com###related
