@@ -2,7 +2,7 @@ bookworm
 
 apt update -y
 
-apt upgrade -y
+apt full-upgrade -y
 
 apt autoremove -y
 
@@ -17,3 +17,5 @@ apt install -y net-tools
 apt install -y sudo
 
 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/x-ui-yg/main/install.sh)
+
+curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
