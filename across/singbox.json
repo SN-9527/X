@@ -83,6 +83,7 @@
       "flow": "xtls-rprx-vision",
       "network": "tcp",
       "tls": {
+        "insecure": false,
         "server_name": "chat.nireus.cc",
         "alpn": [
           "h2"
