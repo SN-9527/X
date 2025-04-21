@@ -6,14 +6,9 @@ curl -L "https://github.com/docker/compose/releases/download/v2.32.4/docker-comp
 
 chmod +x /usr/local/bin/docker-compose
 
-sudo mkdir -p /etc/systemd/system/docker.service.d
-sudo touch /etc/systemd/system/docker.service.d/http-proxy.conf
+dnf install -y yum-utils device-mapper-persistent-data lvm2
+dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+dnf install -y docker-ce docker-ce-cli containerd.io
 
-/etc/systemd/system/docker.service.d/
 
-[Service]
-Environment="HTTP_PROXY=http://10.0.0.108:7897"
-Environment="HTTPS_PROXY=http://10.0.0.108:7897"
-
-sudo systemctl daemon-reload
-sudo systemctl restart docker
+systemctl start docker && systemctl enable docker
