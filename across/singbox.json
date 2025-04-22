@@ -6,22 +6,37 @@
   "dns": {
     "servers": [
       {
-        "tag": "dns_proxy",
-        "address": "8.8.8.8",
-        "detour": "proxy_out"
+        "tag": "dns_oversea",
+        "address": "https://dns.nireus.cc/dns-query",
+        "address_resolver": "dns_server",
+        "address_strategy": "ipv4_only",
+        "strategy": "ipv4_only",
+        "detour": "direct_out",
+        "client_subnet": "23.94.243.117"
       },
       {
-        "tag": "dns_direct",
-        "address": "114.114.114.114",
+        "tag": "dns_china",
+        "address": "https://dns.alidns.com/dns-query",
+        "address_resolver": "dns_server",
+        "address_strategy": "ipv4_only",
+        "strategy": "ipv4_only",
+        "detour": "direct_out",
+        "client_subnet": "223.5.5.5"
+      },
+      {
+        "tag": "dns_server",
+        "address": "23.94.243.117",
+        "strategy": "ipv4_only",
         "detour": "direct_out"
       }
     ],
     "rules": [
       {
         "rule_set": "china_site",
-        "server": "dns_direct"
+        "server": "dns_china"
       }
     ],
+    "final": "dns_oversea",
     "strategy": "ipv4_only",
     "independent_cache": true,
     "cache_capacity": 0,
@@ -32,9 +47,9 @@
       "tag": "tun_main",
       "type": "tun",
       "address": [
-        "10.10.10.0/30"
+        "10.21.85.0/30"
       ],
-      "mtu": 9000,
+      "mtu": 1500,
       "auto_route": true,
       "strict_route": true,
       "stack": "system"
@@ -46,18 +61,8 @@
       "type": "direct"
     },
     {
-      "type": "selector",
       "tag": "proxy_out",
-      "outbounds": [
-        "cloudflare",
-        "reality"
-      ],
-      "default": "reality",
-      "interrupt_exist_connections": true
-    },
-    {
       "type": "vless",
-      "tag": "cloudflare",
       "server": "104.19.0.0",
       "server_port": 8443,
       "uuid": "b38d3591-91c2-4e31-a97c-c444b9339b4e",
@@ -73,33 +78,6 @@
           "host": "chat.nireus.cc"
         }
       }
-    },
-    {
-      "type": "vless",
-      "tag": "reality",
-      "server": "23.94.243.117",
-      "server_port": 60777,
-      "uuid": "0bbf8374-12a6-406f-fdf6-17fabeb463a7",
-      "flow": "xtls-rprx-vision",
-      "network": "tcp",
-      "tls": {
-        "insecure": false,
-        "server_name": "chat.nireus.cc",
-        "alpn": [
-          "h2"
-        ],
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
-        },
-        "reality": {
-          "enabled": true,
-          "public_key": "fPHwscp1bpYvJPJyr_8S0rNefqskOWtEnCi-hiIrmD0",
-          "short_id": "f5f649a2"
-        },
-        "enabled": true
-      },
-      "packet_encoding": "xudp"
     }
   ],
   "route": {
@@ -114,10 +92,6 @@
       },
       {
         "ip_is_private": true,
-        "outbound": "direct_out"
-      },
-      {
-        "rule_set": "china_site",
         "outbound": "direct_out"
       },
       {
