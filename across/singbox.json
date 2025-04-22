@@ -6,22 +6,11 @@
   "dns": {
     "servers": [
       {
-        "tag": "dns_oversea",
         "address": "https://dns.nireus.cc/dns-query",
         "address_resolver": "dns_server",
         "address_strategy": "ipv4_only",
         "strategy": "ipv4_only",
-        "detour": "direct_out",
-        "client_subnet": "23.94.243.117"
-      },
-      {
-        "tag": "dns_china",
-        "address": "https://dns.alidns.com/dns-query",
-        "address_resolver": "dns_server",
-        "address_strategy": "ipv4_only",
-        "strategy": "ipv4_only",
-        "detour": "direct_out",
-        "client_subnet": "223.5.5.5"
+        "detour": "direct_out"
       },
       {
         "tag": "dns_server",
@@ -29,18 +18,7 @@
         "strategy": "ipv4_only",
         "detour": "direct_out"
       }
-    ],
-    "rules": [
-      {
-        "rule_set": "china_site",
-        "server": "dns_china"
-      }
-    ],
-    "final": "dns_oversea",
-    "strategy": "ipv4_only",
-    "independent_cache": true,
-    "cache_capacity": 0,
-    "reverse_mapping": false
+    ]
   },
   "inbounds": [
     {
@@ -65,7 +43,7 @@
       "type": "vless",
       "server": "104.19.0.0",
       "server_port": 8443,
-      "uuid": "b38d3591-91c2-4e31-a97c-c444b9339b4e",
+      "uuid": "82d73bdf-0da7-478c-87d5-6f4cd72fc2fd",
       "tls": {
         "enabled": true,
         "server_name": "chat.nireus.cc",
@@ -105,14 +83,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
-        "download_detour": "proxy_out",
-        "update_interval": "1d"
-      },
-      {
-        "tag": "china_site",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
         "download_detour": "proxy_out",
         "update_interval": "1d"
       }
