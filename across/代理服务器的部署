@@ -1,21 +1,36 @@
-bookworm
-
+# Update
 apt update -y
-
 apt full-upgrade -y
-
 apt autoremove -y
 
-apt install -y vim
+# ACME
+mkdir /ssl
+curl https://get.acme.sh | sh -s email=example@example.com
+reboot
+export CF_Key="93741d9df251e8692bcb88ac16b7a21993f45"
+export CF_Email="123@outlook.com"
+acme.sh --issue --dns dns_cf -d nireus.cc -d '*.nireus.cc' --keylength ec-256
+acme.sh --upgrade --auto-upgrade
+acme.sh --install-cert -d nireus.cc --key-file /ssl/key.pem  --fullchain-file /ssl/cert.pem --reloadcmd "reboot"
 
-apt install -y wget
-
-apt install -y curl
-
-apt install -y net-tools
-
-apt install -y sudo
-
-bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/x-ui-yg/main/install.sh)
-
+# adguardhome
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
+
+# singbox
+sudo mkdir -p /etc/apt/keyrings &&
+   sudo curl -fsSL https://sing-box.app/gpg.key -o /etc/apt/keyrings/sagernet.asc &&
+   sudo chmod a+r /etc/apt/keyrings/sagernet.asc &&
+   echo '
+Types: deb
+URIs: https://deb.sagernet.org/
+Suites: *
+Components: *
+Enabled: yes
+Signed-By: /etc/apt/keyrings/sagernet.asc
+' | sudo tee /etc/apt/sources.list.d/sagernet.sources &&
+   sudo apt-get update &&
+   sudo apt-get install sing-box
+
+systemctl enable sing-box
+systemctl start sing-box
+systemctl restart sing-box

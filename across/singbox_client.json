@@ -6,17 +6,9 @@
   "dns": {
     "servers": [
       {
-        "address": "https://dns.nireus.cc/dns-query",
-        "address_resolver": "dns_server",
-        "address_strategy": "ipv4_only",
+        "address": "tls://8.8.8.8",
         "strategy": "ipv4_only",
-        "detour": "direct_out"
-      },
-      {
-        "tag": "dns_server",
-        "address": "23.94.243.117",
-        "strategy": "ipv4_only",
-        "detour": "direct_out"
+        "detour": "proxy_out"
       }
     ]
   },
@@ -25,7 +17,7 @@
       "tag": "tun_main",
       "type": "tun",
       "address": [
-        "10.21.85.0/30"
+        "10.10.10.0/30"
       ],
       "mtu": 1500,
       "auto_route": true,

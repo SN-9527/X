@@ -1,0 +1,72 @@
+{
+  "log": {
+    "disabled": false,
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "address": "tls://8.8.8.8",
+        "strategy": "ipv4_only"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "type": "vless",
+      "listen": "::",
+      "listen_port": 2048,
+      "users": [
+        {
+          "uuid": "82d73bdf-0da7-478c-87d5-6f4cd72fc2fd"
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "chat.nireus.cc",
+        "key_path": "/ssl/key.pem",
+        "certificate_path": "/ssl/cert.pem"
+      },
+      "transport": {
+        "type": "ws",
+        "early_data_header_name": "Sec-WebSocket-Protocol",
+        "path": "/deepseek",
+        "headers": {
+          "Host": "chat.nireus.cc"
+        }
+      }
+    },
+    {
+      "type": "hysteria2",
+      "listen": "::",
+      "listen_port": 4096,
+      "up_mbps": 1000,
+      "down_mbps": 1000,
+      "users": [
+        {
+          "password": "82d73bdf-0da7-478c-87d5-6f4cd72fc2fd"
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "chat.nireus.cc",
+        "key_path": "/ssl/key.pem",
+        "certificate_path": "/ssl/cert.pem"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "direct"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      }
+    ]
+  }
+}

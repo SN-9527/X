@@ -1,0 +1,28 @@
+{
+  "servers": [
+    {
+      "tag": "remote",
+      "address": "https://dns.nireus.cc/dns-query",
+      "address_resolver": "local",
+      "address_strategy": "ipv4_only",
+      "strategy": "ipv4_only",
+      "detour": "direct"
+    },
+    {
+      "tag": "local",
+      "address": "tls://223.5.5.5",
+      "strategy": "ipv4_only",
+      "detour": "direct"
+    }
+  ],
+  "rules": [
+    {
+      "rule_set": [
+        "geosite-cn"
+      ],
+      "server": "local"
+    }
+  ],
+  "independent_cache": true,
+  "final": "remote"
+}
