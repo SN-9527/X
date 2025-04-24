@@ -9,7 +9,7 @@
         "tag": "oversea",
         "address": "23.94.243.117:1053",
         "strategy": "ipv4_only",
-        "detour": "direct"
+        "detour": "direct_out"
       },
       {
         "tag": "china",
@@ -17,13 +17,13 @@
         "address_resolver": "alibaba",
         "address_strategy": "ipv4_only",
         "strategy": "ipv4_only",
-        "detour": "direct"
+        "detour": "direct_out"
       },
       {
         "tag": "alibaba",
         "address": "223.5.5.5",
         "strategy": "ipv4_only",
-        "detour": "direct"
+        "detour": "direct_out"
       }
     ],
     "rules": [
