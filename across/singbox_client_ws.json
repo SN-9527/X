@@ -30,7 +30,8 @@
       {
         "domain_suffix": [
           "apple.com",
-          "icloud.com"
+          "icloud.com",
+          "mzstatic.com"
         ],
         "server": "alibaba"
       },
@@ -103,7 +104,8 @@
       {
         "domain_suffix": [
           "apple.com",
-          "icloud.com"
+          "icloud.com",
+          "mzstatic.com"
         ],
         "outbound": "direct_out"
       },
