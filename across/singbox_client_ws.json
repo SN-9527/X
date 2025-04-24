@@ -101,6 +101,13 @@
         "outbound": "direct_out"
       },
       {
+        "domain_suffix": [
+          "apple.com",
+          "icloud.com"
+        ],
+        "outbound": "direct_out"
+      },
+      {
         "rule_set": "china_ip",
         "outbound": "direct_out"
       }
