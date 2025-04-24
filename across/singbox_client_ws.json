@@ -13,14 +13,6 @@
       },
       {
         "tag": "china",
-        "address": "quic://dns.nireus.cc:853",
-        "address_resolver": "alibaba",
-        "address_strategy": "ipv4_only",
-        "strategy": "ipv4_only",
-        "detour": "direct_out"
-      },
-      {
-        "tag": "alibaba",
         "address": "223.5.5.5",
         "strategy": "ipv4_only",
         "detour": "direct_out"
@@ -29,21 +21,16 @@
     "rules": [
       {
         "domain_suffix": [
+          "kunlun.asia",
+          "nireus.cc",
           "apple.com",
           "icloud.com",
           "mzstatic.com"
         ],
-        "server": "alibaba"
-      },
-      {
-        "domain_suffix": [
-          "kunlun.asia",
-          "nireus.cc"
-        ],
         "rule_set": [
           "china_site"
         ],
-        "server": "alibaba"
+        "server": "china"
       }
     ],
     "independent_cache": true,
@@ -54,7 +41,7 @@
       "tag": "tun_main",
       "type": "tun",
       "address": [
-        "10.10.10.0/30"
+        "10.0.10.0/30"
       ],
       "mtu": 1500,
       "auto_route": true,
@@ -103,10 +90,16 @@
       },
       {
         "domain_suffix": [
+          "kunlun.asia",
+          "nireus.cc",
           "apple.com",
           "icloud.com",
           "mzstatic.com"
         ],
+        "outbound": "direct_out"
+      },
+      {
+        "rule_set": "china_site",
         "outbound": "direct_out"
       },
       {
