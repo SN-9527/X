@@ -1,0 +1,126 @@
+{
+  "log": {
+    "disabled": false,
+    "level": "info"
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "oversea",
+        "address": "23.94.243.117:1053",
+        "strategy": "ipv4_only",
+        "detour": "direct"
+      },
+      {
+        "tag": "china",
+        "address": "quic://dns.nireus.cc:853",
+        "address_resolver": "alibaba",
+        "address_strategy": "ipv4_only",
+        "strategy": "ipv4_only",
+        "detour": "direct"
+      },
+      {
+        "tag": "alibaba",
+        "address": "223.5.5.5",
+        "strategy": "ipv4_only",
+        "detour": "direct"
+      }
+    ],
+    "rules": [
+      {
+        "domain_suffix": [
+          "apple.com",
+          "icloud.com"
+        ],
+        "server": "alibaba"
+      },
+      {
+        "domain_suffix": [
+          "kunlun.asia",
+          "nireus.cc"
+        ],
+        "rule_set": [
+          "china_site"
+        ],
+        "server": "china"
+      }
+    ],
+    "independent_cache": true,
+    "final": "oversea"
+  },
+  "inbounds": [
+    {
+      "tag": "tun_main",
+      "type": "tun",
+      "address": [
+        "10.0.10.0/30"
+      ],
+      "mtu": 1500,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system"
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "direct_out",
+      "type": "direct"
+    },
+    {
+      "tag": "proxy_out",
+      "type": "hysteria2",
+      "server": "dns.nireus.cc",
+      "server_ports": [
+        "10000:60000"
+      ],
+      "up_mbps": 1000,
+      "down_mbps": 1000,
+      "password": "82d73bdf-0da7-478c-87d5-6f4cd72fc2fd",
+      "tls": {
+        "enabled": true,
+        "server_name": "dns.nireus.cc",
+        "insecure": false
+      }
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "inbound": "tun_main",
+        "action": "sniff"
+      },
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct_out"
+      },
+      {
+        "rule_set": "china_ip",
+        "outbound": "direct_out"
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "china_site",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+        "download_detour": "proxy_out",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "china_ip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "proxy_out",
+        "update_interval": "1d"
+      }
+    ],
+    "final": "proxy_out",
+    "auto_detect_interface": true
+  }
+}
