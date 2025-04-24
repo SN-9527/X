@@ -43,7 +43,7 @@
         "rule_set": [
           "china_site"
         ],
-        "server": "china"
+        "server": "alibaba"
       }
     ],
     "independent_cache": true,
