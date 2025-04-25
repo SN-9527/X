@@ -1,32 +1,17 @@
 {
   "servers": [
     {
-      "tag": "oversea",
-      "address": "23.94.243.117:1053",
+      "address": "quic://dns.nireus.cc:853",
+      "address_resolver": "jiexiqi",
+      "address_strategy": "ipv4_only",
       "strategy": "ipv4_only",
       "detour": "direct"
     },
     {
-      "tag": "china",
-      "address": "quic://dns.nireus.cc:853",
-      "address_resolver": "oversea",
-      "address_strategy": "ipv4_only",
+      "tag": "jiexiqi",
+      "address": "114.114.114.114",
       "strategy": "ipv4_only",
       "detour": "direct"
     }
-  ],
-  "rules": [
-    {
-      "domain_suffix": [
-        "kunlun.asia",
-        "nireus.cc"
-      ],
-      "rule_set": [
-        "geosite-cn"
-      ],
-      "server": "china"
-    }
-  ],
-  "independent_cache": true,
-  "final": "oversea"
+  ]
 }
