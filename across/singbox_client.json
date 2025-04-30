@@ -50,17 +50,17 @@
       "type": "vless",
       "server": "104.19.0.0",
       "server_port": 443,
-      "uuid": "82d73bdf-0da7-478c-87d5-6f4cd72fc2fd",
+      "uuid": "6478801f-648c-4410-80c8-769fb9ae4b0b",
       "tls": {
         "enabled": true,
-        "server_name": "chat.nireus.cc",
+        "server_name": "oamsncrrnrsomnmzwcsrwmxreumacrex.kunlun.asia",
         "insecure": false
       },
       "transport": {
         "type": "ws",
-        "path": "/deepseek",
+        "path": "/evonmeawnaxcere",
         "headers": {
-          "host": "chat.nireus.cc"
+          "host": "oamsncrrnrsomnmzwcsrwmxreumacrex.kunlun.asia"
         }
       }
     }
